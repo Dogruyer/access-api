@@ -1,6 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <item>
-    <Kodu>BOYA0428</Kodu>
+    <MaliyetKisim>BASKI</MaliyetKisim>
+  </item>
+  <item>
+    <MakinaNo>
+    </MakinaNo>
+  </item>
+  <item>
+    <MakinaAdi>
+    </MakinaAdi>
+  </item>
+  <item>
+    <Iscilik>0</Iscilik>
+  </item>
+  <item>
+    <Dogalgaz>0,0162441477142857</Dogalgaz>
+  </item>
+  <item>
+    <DgG>0</DgG>
+  </item>
+  <item>
+    <Buhar>
+    </Buhar>
+  </item>
+  <item>
+    <Elektrik>0,0961112077777778</Elektrik>
+  </item>
+  <item>
+    <ElG>0</ElG>
+  </item>
+  <item>
+    <Su>0,012183111</Su>
+  </item>
+  <item>
+    <SabitKimyevi>0</SabitKimyevi>
+  </item>
+  <item>
+    <SKG>0</SKG>
+  </item>
+  <item>
+    <Sablon>0</Sablon>
+  </item>
+  <item>
+    <Nakliye>0</Nakliye>
+  </item>
+  <item>
+    <Diger>0</Diger>
+  </item>
+  <item>
+    <Toplam>0</Toplam>
+  </item>
+  <item>
+    <TG>0</TG>
   </item>
 </root>

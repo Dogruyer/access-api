@@ -13,7 +13,8 @@ namespace BartexAccess.Controllers
         //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\testdogruyer.duckdns.org\httpdocs\bartex_aktarma1.mdb";
         //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\bartex_aktarma1.mdb";
         string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\bartex_aktarma1.mdb";
-        string connectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\Tiger.mdb";
+        string connectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\Tiger.mdb";
+        string connectionMakina = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\MakinaMaliyet.mdb";
         DataTable dt = new DataTable();
 
 
@@ -662,6 +663,31 @@ namespace BartexAccess.Controllers
         }
 
 
+        #endregion
+
+        #region MakinaMaliyet
+        [Route("MakinaMaliyet/Kısım/{encodingType}")]
+        public ActionResult MakinaMaliyetKisim(string encodingType)
+        {
+
+            var base64EncodedBytes = System.Convert.FromBase64String(encodingType);
+            string deger = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+
+           
+                var tsql = "SELECT Dogalgaz,Elektrik,Buhar,Su From MakinaMaliyet Where MaliyetKisim =" + "'" + deger + "'" + " ";
+                using (var conn = new OleDbConnection(connectionMakina))
+                {
+                    var cmd = new OleDbCommand(tsql, conn);
+                    var da = new OleDbDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+                islem.LogEkle(dt);
+
+
+            
+            string xml = System.IO.File.ReadAllText(Server.MapPath("~/kartno.xml"));
+            return Content(xml, "xml");
+        }
         #endregion
 
 

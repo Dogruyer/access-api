@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/BartexAccess.dll">
-      <publishTime>12/28/2018 11:03:10</publishTime>
+      <publishTime>01/02/2019 15:29:28</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/15/2015 02:06:24</publishTime>
@@ -91,7 +91,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/20/2018 14:02:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/25/2018 14:34:00</publishTime>
+      <publishTime>01/02/2019 15:29:28</publishTime>
     </File>
   </ItemGroup>
 </Project>
