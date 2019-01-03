@@ -1,57 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <item>
-    <MaliyetKisim>BASKI</MaliyetKisim>
+    <Adi>EVERZOL NAVY ED</Adi>
   </item>
   <item>
-    <MakinaNo>
-    </MakinaNo>
+    <Expr1001>29,5</Expr1001>
   </item>
   <item>
-    <MakinaAdi>
-    </MakinaAdi>
+    <Adi>KIRAZOL RED C-RB</Adi>
   </item>
   <item>
-    <Iscilik>0</Iscilik>
+    <Expr1001>11,6</Expr1001>
   </item>
   <item>
-    <Dogalgaz>0,0162441477142857</Dogalgaz>
+    <Adi>KIRAZOL YELLOW C-GR</Adi>
   </item>
   <item>
-    <DgG>0</DgG>
+    <Expr1001>8,5</Expr1001>
   </item>
   <item>
-    <Buhar>
-    </Buhar>
+    <Adi>KOSTIK</Adi>
   </item>
   <item>
-    <Elektrik>0,0961112077777778</Elektrik>
+    <Expr1001>35</Expr1001>
   </item>
   <item>
-    <ElG>0</ElG>
+    <Adi>REAKTOSET BRILL.BLUE C-BB</Adi>
   </item>
   <item>
-    <Su>0,012183111</Su>
+    <Expr1001>15,4</Expr1001>
   </item>
   <item>
-    <SabitKimyevi>0</SabitKimyevi>
+    <Adi>SODYUM SILIKAT</Adi>
   </item>
   <item>
-    <SKG>0</SKG>
-  </item>
-  <item>
-    <Sablon>0</Sablon>
-  </item>
-  <item>
-    <Nakliye>0</Nakliye>
-  </item>
-  <item>
-    <Diger>0</Diger>
-  </item>
-  <item>
-    <Toplam>0</Toplam>
-  </item>
-  <item>
-    <TG>0</TG>
+    <Expr1001>50</Expr1001>
   </item>
 </root>

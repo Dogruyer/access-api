@@ -11,8 +11,8 @@ namespace BartexAccess.Controllers
     public class IslemController : Controller
     {
         //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\testdogruyer.duckdns.org\httpdocs\bartex_aktarma1.mdb";
-        //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\bartex_aktarma1.mdb";
-        string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\bartex_aktarma1.mdb";
+        string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\bartex_aktarma1.mdb";
+        //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\bartex_aktarma1.mdb";
         string connectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\Tiger.mdb";
         string connectionMakina = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\MakinaMaliyet.mdb";
         DataTable dt = new DataTable();
@@ -501,6 +501,34 @@ namespace BartexAccess.Controllers
         }
         #endregion
 
+        #region Parti Hareketi
+
+        [Route("PartiHareketi/PartiNo/{encodingType}")]
+        public ActionResult PartiHarNo(string encodingType)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(encodingType);
+            string deger = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            using (var con = new OleDbConnection(connect))
+                {
+                   
+                    var tsql = "SELECT  [Sipariş No] as SipNo , [Çekilen] as Cekilen , [İrsaliye No] as IrsaliyeNo , Gelen , Tarih From PartiHareketi Where [Parti No] =" + "'" + deger + "'" + " ";
+                    var command = new OleDbCommand(tsql, con);
+                    var da = new OleDbDataAdapter(command);
+                    da.Fill(dt);
+                    islem.LogEkle(dt);
+                }
+            
+            string xml = System.IO.File.ReadAllText(Server.MapPath("~/kartno.xml"));
+            return Content(xml, "xml");
+        }
+
+
+
+
+
+
+        #endregion
+
         #region Prg
         [Route("Prg/SipNo/{id}")]
         public ActionResult PrgSipNo(string id)
@@ -525,7 +553,7 @@ namespace BartexAccess.Controllers
 
         #region Reçete
 
-        [Route("Recete/ReceteNo/{sorgu}")]
+        [Route("Recete/ReceteNo/{encodingType}")]
         public ActionResult ReceteNo(string encodingType)
         {
             //var bas = sorgu.Split('-')[0];
@@ -544,7 +572,7 @@ namespace BartexAccess.Controllers
             islem.LogEkle(dt);
 
             string xml = System.IO.File.ReadAllText(Server.MapPath("~/kartno.xml"));
-            return Content(xml, "text/xml");
+            return Content(xml, "xml");
         }
 
 
