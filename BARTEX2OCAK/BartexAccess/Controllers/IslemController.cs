@@ -13,6 +13,7 @@ namespace BartexAccess.Controllers
         //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\testdogruyer.duckdns.org\httpdocs\bartex_aktarma1.mdb";
         string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\bartex_aktarma1.mdb";
         //string connect = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\bartex_aktarma1.mdb";
+        //string connectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=C:\Users\Dogruyer_5\Desktop\Tiger.mdb";
         string connectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\Tiger.mdb";
         string connectionMakina = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=\Inetpub\vhosts\7houseburger.com\demo\MakinaMaliyet.mdb";
         DataTable dt = new DataTable();
@@ -665,20 +666,48 @@ namespace BartexAccess.Controllers
 
         #region TIGER Veriler
 
-        [Route("Tiger/{encodingType}/{tarih}")]
-        public ActionResult TigerVeriDoviz(string encodingType, string tarih)
-        {
+        ////[Route("Tiger/{encodingType}/{tarih}")]
+        ////public ActionResult TigerVeriDoviz(string encodingType, string tarih)
+        ////{
 
+        ////    var base64EncodedBytes = System.Convert.FromBase64String(encodingType);
+        ////    string deger = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+
+        ////    using (var con = new OleDbConnection(connectionString))
+        ////    {
+        ////        //YIL- AY GÜN
+        ////        var tsql = "SELECT PRICE as BirimFiyat,CRR as DovizCinsi,PTYPE as Birim FROM Tiger WHERE CODE = '" + deger + "' AND PDATE LIKE '" + tarih + "%" + "' ";
+        ////        var command = new OleDbCommand(tsql, con);
+        ////        var da = new OleDbDataAdapter(command);
+        ////        da.Fill(dt);
+
+        ////    }
+        ////    islemTiger.LogEkle(dt);
+
+
+
+
+            //string xml = System.IO.File.ReadAllText(Server.MapPath("~/tiger.xml"));
+            //return Content(xml, "xml");
+        
+
+        [Route("Tiger/{encodingType}/{tarih}")]
+        public ActionResult TigerVeriTarih(string encodingType, string tarih)
+        {
+       
             var base64EncodedBytes = System.Convert.FromBase64String(encodingType);
             string deger = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-
+            //var basTarihCevir = tarih.Replace("-", "/");
+            //var eklenmis = basTarihCevir + "/00:00:00.000";
+            var cevirTarih = tarih.Replace("-", "/");
             using (var con = new OleDbConnection(connectionString))
             {
-                //YIL- AY GÜN
-                var tsql = "SELECT PRICE as BirimFiyat,CRR as DovizCinsi,PTYPE as Birim FROM Tiger WHERE CODE = '" + deger + "' AND PDATE LIKE '" + tarih + "%" + "' ";
+                //YIL- AY GÜN                
+                var tsql = "SELECT TOP 1  PDATE , PRICE as BirimFiyat,CRR as DovizCinsi,PTYPE as Birim FROM Tiger WHERE CODE = '" + deger + "' AND [PDATE] <= #" + cevirTarih + "# ORDER By [PDATE] Desc";
                 var command = new OleDbCommand(tsql, con);
                 var da = new OleDbDataAdapter(command);
                 da.Fill(dt);
+              
 
             }
             islemTiger.LogEkle(dt);
@@ -691,6 +720,9 @@ namespace BartexAccess.Controllers
         }
 
 
+
+
+
         #endregion
 
         #region MakinaMaliyet
@@ -701,18 +733,18 @@ namespace BartexAccess.Controllers
             var base64EncodedBytes = System.Convert.FromBase64String(encodingType);
             string deger = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
 
-           
-                var tsql = "SELECT Dogalgaz,Elektrik,Buhar,Su From MakinaMaliyet Where MaliyetKisim =" + "'" + deger + "'" + " ";
-                using (var conn = new OleDbConnection(connectionMakina))
-                {
-                    var cmd = new OleDbCommand(tsql, conn);
-                    var da = new OleDbDataAdapter(cmd);
-                    da.Fill(dt);
-                }
-                islem.LogEkle(dt);
+
+            var tsql = "SELECT Dogalgaz,Elektrik,Buhar,Su From MakinaMaliyet Where MaliyetKisim =" + "'" + deger + "'" + " ";
+            using (var conn = new OleDbConnection(connectionMakina))
+            {
+                var cmd = new OleDbCommand(tsql, conn);
+                var da = new OleDbDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            islem.LogEkle(dt);
 
 
-            
+
             string xml = System.IO.File.ReadAllText(Server.MapPath("~/kartno.xml"));
             return Content(xml, "xml");
         }
